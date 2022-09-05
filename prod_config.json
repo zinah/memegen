@@ -1,0 +1,5 @@
+{
+    "ImageSourceURL": "https://cataas.com/cat",
+    "DefaultImageLocalPath": "./assets/default_cat.jpeg",
+    "DictionaryLocalPath": "./assets/tranzlashun.json"
+}
