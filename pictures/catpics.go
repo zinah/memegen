@@ -27,7 +27,9 @@ func GetImageHttp(url string) (image.Image, error) {
 		return nil, err
     }
     defer resp.Body.Close()
-	bgImage, _, _ := image.Decode(resp.Body)
+	// TODO handle errors
+	// TODO handle image type
+	bgImage, _, err := image.Decode(resp.Body)
 	if err != nil {
 		return nil, err
 	}
