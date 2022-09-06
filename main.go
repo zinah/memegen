@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,8 +35,12 @@ func handler(w http.ResponseWriter, r *http.Request, configuration Configuration
 }
 
 func main() {
+	var environment string
+	flag.StringVar(&environment, "env", "dev", "Environment type, default is dev")
+	flag.Parse()
+
 	configuration := Configuration{}
-	err := gonfig.GetConf("dev_config.json", &configuration)
+	err := gonfig.GetConf(fmt.Sprintf("./%s_config.json", environment), &configuration)
 	if err != nil {
 		panic(err)
 	}
