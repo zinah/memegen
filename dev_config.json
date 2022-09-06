@@ -1,5 +1,6 @@
 {
     "ImageSourceURL": "http://localhost:3000/cat",
     "DefaultImageLocalPath": "./assets/default_cat.jpeg",
-    "DictionaryLocalPath": "./assets/tranzlashun.json"
+    "DictionaryLocalPath": "./assets/tranzlashun.json",
+    "CaptionSourceURL": "http://localhost:3000/joke"
 }

@@ -17,10 +17,11 @@ type Configuration struct {
 	ImageSourceURL string
 	DefaultImageLocalPath string
 	DictionaryLocalPath string
+	CaptionSourceURL string
 }
 
 func handler(w http.ResponseWriter, r *http.Request, configuration Configuration, dictionary map[string]string) {
-	text1, text2 := captions.GetJoke()
+	text1, text2 := captions.GetJoke(configuration.CaptionSourceURL)
 	textAbove, textBelow := translation.Translate(text1, dictionary), translation.Translate(text2, dictionary)
 	if bgImage, err := pictures.GetImage(configuration.ImageSourceURL, configuration.DefaultImageLocalPath); err != nil {
 		web.GetErrorResponse(w, err)

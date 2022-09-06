@@ -1,5 +1,6 @@
 {
     "ImageSourceURL": "https://cataas.com/cat",
     "DefaultImageLocalPath": "./assets/default_cat.jpeg",
-    "DictionaryLocalPath": "./assets/tranzlashun.json"
+    "DictionaryLocalPath": "./assets/tranzlashun.json",
+    "CaptionSourceURL": "https://v2.jokeapi.dev/joke/Programming"
 }
