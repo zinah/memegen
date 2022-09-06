@@ -29,6 +29,7 @@ func GetJoke(CaptionSourceURL string) (string, string) {
 	var jokeRes map[string]string
 	// TODO handle errors when JSON malformed
 	json.Unmarshal([]byte(body), &jokeRes)
+	// TODO use jokesRes["type"] ("twopart"/"single") instead
 	setup, ok := jokeRes["setup"]
 	delivery, ok := jokeRes["delivery"]
 	if ok {
