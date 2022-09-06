@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-// TODO dictionary should be in some sort of DB instead
 func Translate(text string, dictionary map[string]string) (string) {
 	// TODO handle punctuation, especially at the end
 	// TODO handle empty text?

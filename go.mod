@@ -2,6 +2,8 @@ module github.com/zinah/memegen
 
 go 1.19
 
+require github.com/gorilla/mux v1.8.0
+
 require github.com/fogleman/gg v1.3.0
 
 require github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"github.com/gorilla/mux"
 	"github.com/tkanos/gonfig"
 	"github.com/zinah/memegen/captions"
 	"github.com/zinah/memegen/pictures"
@@ -16,15 +18,7 @@ type Configuration struct {
 	DictionaryLocalPath string
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	// TODO Do not to load this on every request - how to pass the config into the handler?
-	configuration := Configuration{}
-	err := gonfig.GetConf("dev_config.json", &configuration)
-	if err != nil {
-		panic(err)
-	}
-	// TODO Don't load the dictionary every time a request is made, it doesn't change
-	dictionary := translation.GetDictionaryFromJson(configuration.DictionaryLocalPath)
+func handler(w http.ResponseWriter, r *http.Request, configuration Configuration, dictionary map[string]string) {
 	text1, text2 := captions.GetJoke()
 	textAbove, textBelow := translation.Translate(text1, dictionary), translation.Translate(text2, dictionary)
 	if bgImage, err := pictures.GetImage(configuration.ImageSourceURL, configuration.DefaultImageLocalPath); err != nil {
@@ -40,7 +34,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    http.HandleFunc("/", handler)
-    log.Fatal(http.ListenAndServe(":8080", nil))
+	configuration := Configuration{}
+	err := gonfig.GetConf("dev_config.json", &configuration)
+	if err != nil {
+		panic(err)
+	}
+	// TODO dictionary should be in some sort of DB instead
+	dictionary := translation.GetDictionaryFromJson(configuration.DictionaryLocalPath)
 
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		handler(w, r, configuration, dictionary)
+	}).Methods("GET")
+
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
