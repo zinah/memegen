@@ -23,10 +23,11 @@ type Configuration struct {
 func handler(w http.ResponseWriter, r *http.Request, configuration Configuration, dictionary map[string]string) {
 	text1, text2 := captions.GetJoke(configuration.CaptionSourceURL)
 	textAbove, textBelow := translation.Translate(text1, dictionary), translation.Translate(text2, dictionary)
+	fontPath := "./assets/fonts/impact.ttf"
 	if bgImage, err := pictures.GetImage(configuration.ImageSourceURL, configuration.DefaultImageLocalPath); err != nil {
 		web.GetErrorResponse(w, err)
 	} else {
-		if img, err := pictures.ApplyCaption(bgImage, textAbove, textBelow); err != nil {
+		if img, err := pictures.ApplyCaption(bgImage, textAbove, textBelow, fontPath); err != nil {
 			// TODO at this point the background image is loaded successfully, maybe at least show that?
 			web.GetErrorResponse(w, err)
 		} else {

@@ -26,7 +26,7 @@ func ApplyText(ctx *gg.Context, textStartPosX float64, textStartPosY float64, te
 	return ctx
 }
 
-func ApplyCaption(bgImage image.Image, textAbove string, textBelow string) (image.Image, error) {
+func ApplyCaption(bgImage image.Image, textAbove string, textBelow string, fontPath string) (image.Image, error) {
 	imgWidth := bgImage.Bounds().Dx()
 	imgHeight := bgImage.Bounds().Dy()
 
@@ -34,7 +34,7 @@ func ApplyCaption(bgImage image.Image, textAbove string, textBelow string) (imag
 	ctx.DrawImage(bgImage, 0, 0)
 
 	// TODO calculate appropriate font size based on the image size
-	if err := ctx.LoadFontFace("./assets/fonts/impact.ttf", 30); err != nil {
+	if err := ctx.LoadFontFace(fontPath, 30); err != nil {
 		return nil, err
 	}
 
