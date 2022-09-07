@@ -6,7 +6,7 @@ var RoboHydraHeadStatic = require("robohydra").heads.RoboHydraHeadStatic;
 exports.getBodyParts = function(conf) {
     return {    
         heads: [
-		    new RoboHydraHeadFilesystem({
+            new RoboHydraHeadFilesystem({
                 mountPath: '/assets',
                 documentRoot: 'assets'
             }),

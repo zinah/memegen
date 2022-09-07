@@ -11,7 +11,7 @@ import (
 func GetJoke(CaptionSourceURL string) (string, string) {
 	textAboveDefault, textBelowDefault := "How do you know God is a shitty programmer?", "He wrote the OS for an entire universe, but didn't leave a single useful comment."
 	client := http.Client{
-		Timeout: 1 * time.Second,
+		Timeout: 3 * time.Second,
 	}
 	resp, err := client.Get(CaptionSourceURL)
     if err != nil {
