@@ -1,6 +1,8 @@
 # The base go-image
 FROM golang:1.14-alpine
 
+RUN apk add build-base
+
 # Create a directory for the app
 RUN mkdir /memegen
 
